@@ -1,0 +1,20 @@
+services:
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: gig_rights_api
+    ports:
+      - "8000:8000"
+    volumes:
+      # Mount local directory to container for live-reloading during development
+      - .:/app
+      # Persist SQLite database outside container so data isn't lost on restart
+      - gig_data:/app/data
+    environment:
+      - PYTHONUNBUFFERED=1
+      - DATABASE_URL=sqlite:////app/gig_rights.db
+    command: uvicorn gig_rights.main:app --host 0.0.0.0 --port 8000 --reload
+
+volumes:
+  gig_data:
