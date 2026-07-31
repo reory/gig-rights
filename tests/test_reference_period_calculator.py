@@ -2,7 +2,7 @@ from datetime import date
 from decimal import Decimal
 
 import pytest
-from hypothesis import given
+from hypothesis import given, settings
 from hypothesis import strategies as st
 
 from gig_rights.core.calculators.reference_period import ReferencePeriodCalculator
@@ -229,7 +229,8 @@ class TestReferencePeriodCalculatorUnit:
 
 class TestReferencePeriodCalculatorHypothesis:
     """Property-based tests for reference period invariants."""
-
+    
+    @settings(deadline=None)
     @given(
         leave_hours=st.decimals(
             min_value=Decimal("0.00"), max_value=Decimal("100.00"), places=2

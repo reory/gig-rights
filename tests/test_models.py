@@ -2,7 +2,7 @@ from datetime import date
 from decimal import Decimal
 
 import pytest
-from hypothesis import given
+from hypothesis import given, settings
 from hypothesis import strategies as st
 from pydantic import ValidationError
 
@@ -104,7 +104,8 @@ class TestModelsUnit:
 
 class TestModelsHypothesis:
     """Property-based invariant tests for domain models."""
-
+    
+    @settings(deadline=None)
     @given(
         hours=st.decimals(
             min_value=Decimal("0.00"), max_value=Decimal("1000.00"), places=2

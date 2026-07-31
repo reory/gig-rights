@@ -1,7 +1,6 @@
 """52-week reference period calculator with statutory zero-pay week exclusion."""
 
 from decimal import ROUND_HALF_UP, Decimal
-from typing import List
 
 from gig_rights.core.calculators.base import BaseHolidayCalculator
 from gig_rights.core.models import (
@@ -19,7 +18,7 @@ class ReferencePeriodCalculator(BaseHolidayCalculator):
         self, worker: Worker, current_period: PayPeriod, **kwargs
     ) -> CalculationResult:
 
-        historical_periods: List[PayPeriod] = kwargs.get("historical_periods", [])
+        historical_periods: list[PayPeriod] = kwargs.get("historical_periods", [])
         requested_leave_hours: Decimal = kwargs.get(
             "requested_leave_hours", Decimal("0.0")
         )

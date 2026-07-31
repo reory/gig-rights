@@ -13,4 +13,3 @@ class BaseHolidayCalculator(ABC):
         self, worker: Worker, current_period: PayPeriod, **kwargs
     ) -> CalculationResult:
         """Execute calculation and return audit-ready result with metadata."""
-        pass

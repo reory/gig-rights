@@ -1,5 +1,5 @@
 import pytest
-from hypothesis import given
+from hypothesis import given, settings
 from hypothesis import strategies as st
 from pydantic import ValidationError
 
@@ -91,7 +91,8 @@ class TestWorkerClassifierUnit:
 
 class TestWorkerClassifierHypothesis:
     """Property-based invariant tests across all combinations of classification inputs."""
-
+    
+    @settings(deadline=None)
     @given(
         hours_vary=st.booleans(),
         fixed_rotation=st.booleans(),

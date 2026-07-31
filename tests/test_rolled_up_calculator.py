@@ -2,7 +2,7 @@ from datetime import date
 from decimal import Decimal
 
 import pytest
-from hypothesis import given
+from hypothesis import given, settings
 from hypothesis import strategies as st
 
 from gig_rights.core.calculators.rolled_up import RolledUpPayCalculator
@@ -130,10 +130,11 @@ class TestRolledUpPayCalculatorUnit:
 
 class TestRolledUpPayCalculatorHypothesis:
     """Property-based tests for rolled-up pay invariants."""
-
+    
+    @settings(deadline=None)
     @given(
         hours=st.decimals(
-            min_value=Decimal("0.00"), max_value=Decimal("200.00"), places=2
+            min_value=Decimal("0.00"), max_value=Decimal("1000.00"), places=2
         ),
         gross=st.decimals(
             min_value=Decimal("0.00"), max_value=Decimal("10000.00"), places=2

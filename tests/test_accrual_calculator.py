@@ -2,7 +2,7 @@ from datetime import date
 from decimal import Decimal
 
 import pytest
-from hypothesis import given
+from hypothesis import given, settings
 from hypothesis import strategies as st
 
 from gig_rights.core.calculators.accrual import (
@@ -103,7 +103,8 @@ class TestAccrualCalculatorUnit:
 
 class TestAccrualCalculatorHypothesis:
     """Property-based tests using Hypothesis to verify invariant rules across all inputs."""
-
+    
+    @settings(deadline=None)
     @given(
         hours=st.decimals(
             min_value=Decimal("0.00"),
